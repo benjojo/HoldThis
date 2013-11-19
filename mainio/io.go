@@ -34,6 +34,7 @@ func GetEntries() []Entry {
 	path := GetLocation()
 	FileCheck(path)
 	file, e := ioutil.ReadFile(path)
+	check(e)
 	var Bits []Entry
 	err := json.Unmarshal(file, &Bits)
 	if err != nil {
@@ -51,15 +52,21 @@ func Get(key string) Entry {
 			return testcase
 		}
 	}
-	return nil
+	panic("Cannot Find")
 }
 
 func Set(key string, value string) {
 	Bits := GetEntries()
-	e := Entry()
+	var e Entry
 	e.key = key
 	e.value = value
 	BitsReloaded := append(Bits, e)
 	b, _ := json.Marshal(BitsReloaded)
 	ioutil.WriteFile(GetLocation(), b, 0664)
+}
+
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
 }
