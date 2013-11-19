@@ -41,6 +41,7 @@ func GetEntries() []Entry {
 	} else {
 		fmt.Println("Oh dear. I can't decode our bookmarks file. this is a pretty big issue.")
 	}
+	panic("Can't continue")
 }
 
 func Get(key string) Entry {
