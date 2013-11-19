@@ -35,7 +35,7 @@ func GetEntries() []Entry {
 	FileCheck(path)
 	file, e := ioutil.ReadFile(path)
 	var Bits []Entry
-	err := json.Unmarshal(jsonBlob, &Bits)
+	err := json.Unmarshal(file, &Bits)
 	if err != nil {
 		return Bits
 	} else {
@@ -59,7 +59,7 @@ func Set(key string, value string) {
 	e := Entry()
 	e.key = key
 	e.value = value
-	append(bits, e)
-	b, _ := json.Marshal(Bits)
+	BitsReloaded := append(Bits, e)
+	b, _ := json.Marshal(BitsReloaded)
 	ioutil.WriteFile(GetLocation(), b, 0664)
 }
