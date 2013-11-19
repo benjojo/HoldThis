@@ -33,7 +33,7 @@ func GetEntries() []Entry {
 	check(e)
 	var Bits []Entry
 	err := json.Unmarshal(file, &Bits)
-	if err != nil {
+	if err == nil {
 		return Bits
 	} else {
 		fmt.Println("Oh dear. I can't decode our bookmarks file. this is a pretty big issue.")
