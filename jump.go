@@ -2,6 +2,7 @@ package main
 
 import (
 	mainio "./mainio"
+	"fmt"
 	"github.com/codegangsta/cli"
 	"os"
 )
@@ -14,7 +15,11 @@ func main() {
 	app.Action = func(c *cli.Context) {
 		if len(c.Args()) == 1 {
 			// Now we need to save it.
-			os.Chdir(mainio.Get(c.Args()[0]).Value)
+			target := mainio.Get(c.Args()[0]).Value
+			fmt.Println(target)
+			os.Chdir(target)
+			os.Setenv("PWD", target)
+
 		} else {
 			println(app.Usage)
 		}
