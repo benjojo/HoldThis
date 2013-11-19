@@ -9,12 +9,8 @@ import (
 )
 
 func GetLocation() string {
-	usr, err := user.Current()
-	if err != nil {
-		return fmt.Sprintf("%s/.holdthisdb", usr)
-	} else {
-		panic(err)
-	}
+	usr, _ := user.Current()
+	return fmt.Sprintf("%s/.holdthisdb", usr.HomeDir)
 }
 
 func FileCheck(filename string) {
