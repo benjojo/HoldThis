@@ -15,6 +15,7 @@ func main() {
 			str, _ := os.Getwd()
 			println("Saving the directory", str, "as the name '", c.Args()[0], "'")
 			// Now we need to save it.
+			Set(c.Args()[0], str)
 		} else {
 			println(app.Usage)
 		}

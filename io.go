@@ -50,10 +50,15 @@ func Get(key string) Entry {
 			return testcase
 		}
 	}
+	return nil
 }
 
 func Set(key string, value string) {
-	path := GetLocation()
-	FileCheck(path)
-
+	Bits := GetEntries()
+	e := Entry()
+	e.key = key
+	e.value = value
+	append(bits, e)
+	b, _ := json.Marshal(Bits)
+	ioutil.WriteFile(GetLocation(), b, 0664)
 }
