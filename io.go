@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -24,12 +25,34 @@ func FileCheck(filename string) {
 	}
 }
 
-func Get() {
-	path := GetLocation()
-	FileCheck(path)
+type Entry struct {
+	key   string
+	value string
 }
 
-func Set() {
+func GetEntries() []Entry {
+	path := GetLocation()
+	FileCheck(path)
+	file, e := ioutil.ReadFile(path)
+	var Bits []Entry
+	err := json.Unmarshal(jsonBlob, &Bits)
+	if err != nil {
+		return Bits
+	} else {
+		fmt.Println("Oh dear. I can't decode our bookmarks file. this is a pretty big issue.")
+	}
+}
+
+func Get(key string) Entry {
+	Bits := GetEntries()
+	for _, testcase := range Bits {
+		if testcase.key == key {
+			return testcase
+		}
+	}
+}
+
+func Set(key string, value string) {
 	path := GetLocation()
 	FileCheck(path)
 
