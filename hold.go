@@ -1,6 +1,7 @@
 package main
 
 import (
+	"./mainio"
 	"github.com/codegangsta/cli"
 	"os"
 )
