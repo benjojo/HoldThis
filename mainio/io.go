@@ -16,14 +16,14 @@ func GetLocation() string {
 func FileCheck(filename string) {
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
 		fmt.Printf("Making file", filename)
-		ioutil.WriteFile(filename, []byte("[]"), 0664)
+		ioutil.WriteFile(filename, []byte("[{\"key\":\"roothome\",\"value\":\"/root\"}]"), 0664)
 		return
 	}
 }
 
 type Entry struct {
-	key   string
-	value string
+	Key   string
+	Value string
 }
 
 func GetEntries() []Entry {
@@ -33,7 +33,7 @@ func GetEntries() []Entry {
 	check(e)
 	var Bits []Entry
 	err := json.Unmarshal(file, &Bits)
-	fmt.Println(Bits)
+	// fmt.Println(Bits)
 	if err == nil {
 		return Bits
 	} else {
@@ -45,7 +45,7 @@ func GetEntries() []Entry {
 func Get(key string) Entry {
 	Bits := GetEntries()
 	for _, testcase := range Bits {
-		if testcase.key == key {
+		if testcase.Key == key {
 			return testcase
 		}
 	}
@@ -55,10 +55,10 @@ func Get(key string) Entry {
 func Set(key string, value string) {
 	Bits := GetEntries()
 	e := Entry{
-		key:   key,
-		value: value,
+		Key:   key,
+		Value: value,
 	}
-	fmt.Println(e)
+	// fmt.Println(e)
 	BitsReloaded := append(Bits, e)
 	b, _ := json.Marshal(BitsReloaded)
 	ioutil.WriteFile(GetLocation(), b, 0664)
