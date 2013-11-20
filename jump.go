@@ -16,7 +16,7 @@ func main() {
 		if len(c.Args()) == 1 {
 			// Now we need to save it.
 			target := mainio.Get(c.Args()[0]).Value
-			fmt.Println(target)
+			#fmt.Println(target)
 			os.Chdir(target)
 			os.Setenv("PWD", target)
 			os.Setenv("pwd", target)
