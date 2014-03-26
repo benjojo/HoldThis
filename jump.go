@@ -3,29 +3,20 @@ package main
 import (
 	mainio "./mainio"
 	"fmt"
-	"github.com/codegangsta/cli"
 	"os"
 )
 
 func main() {
-	app := cli.NewApp()
 
-	app.Name = "HoldThis - Jumperr"
-	app.Usage = "$ Jump <name of hold>"
-	app.Action = func(c *cli.Context) {
-		if len(c.Args()) == 1 {
-			// Now we need to save it.
-			target := mainio.Get(c.Args()[0]).Value
-			//fmt.Println(target)
-			os.Chdir(target)
-			os.Setenv("PWD", target)
-			os.Setenv("pwd", target)
-			fmt.Println("cd", os.Getenv("PWD"))
+	if len(os.Args) == 2 {
 
-		} else {
-			fmt.Println(app.Usage)
-		}
+		target := mainio.Get(os.Args[1]).Value
+		os.Chdir(target)
+		os.Setenv("PWD", target)
+		fmt.Println("cd", os.Getenv("PWD"))
+	} else {
+		// fmt.Println("HoldThis - Jump Program")
+		// fmt.Println("$ jump <name of hold>")
+		os.Exit(1)
 	}
-
-	app.Run(os.Args)
 }
