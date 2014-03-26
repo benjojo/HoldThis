@@ -20,7 +20,7 @@ func main() {
 			os.Chdir(target)
 			os.Setenv("PWD", target)
 			os.Setenv("pwd", target)
-			fmt.Println("cd",os.Getenv("PWD"))
+			fmt.Println("cd", os.Getenv("PWD"))
 
 		} else {
 			fmt.Println(app.Usage)
