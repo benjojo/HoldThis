@@ -1,6 +1,6 @@
 #!/bin/bash
-go build hold.go &&
-go build jump.go &&
+go build hold.go io.go &&
+go build jump.go io.go &&
 mv hold /bin/ &&
 mv jump /bin/_jump &&
 echo 'function jump() { $( _jump "$@" ) ;}' >> ~/.profile &&
