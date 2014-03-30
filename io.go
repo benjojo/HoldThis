@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/user"
 )
@@ -39,7 +40,7 @@ func GetEntries() []Entry {
 	} else {
 		fmt.Println("Oh dear. I can't decode our bookmarks file. this is a pretty big issue.")
 	}
-	panic("Can't continue")
+	log.Fatal("Can't continue")
 }
 
 func Get(key string) Entry {
@@ -49,7 +50,7 @@ func Get(key string) Entry {
 			return testcase
 		}
 	}
-	panic("Cannot Find")
+	log.Fatal("Cannot Find")
 }
 
 func Set(key string, value string) {
@@ -66,6 +67,6 @@ func Set(key string, value string) {
 
 func check(e error) {
 	if e != nil {
-		panic(e)
+		log.Fatal(e)
 	}
 }
