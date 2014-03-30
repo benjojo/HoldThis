@@ -16,7 +16,7 @@ func GetLocation() string {
 
 func FileCheck(filename string) {
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		fmt.Printf("Making file", filename)
+		fmt.Printf("Making file %s\n", filename)
 		ioutil.WriteFile(filename, []byte("[{\"key\":\"roothome\",\"value\":\"/root\"}]"), 0664)
 		return
 	}
