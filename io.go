@@ -17,7 +17,11 @@ func GetLocation() string {
 func FileCheck(filename string) {
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
 		fmt.Printf("Making file %s\n", filename)
-		ioutil.WriteFile(filename, []byte("[{\"key\":\"roothome\",\"value\":\"/root\"}]"), 0664)
+		Sample := make([]Entry, 0)
+		SE := Entry{"roothome", "/root"}
+		Sample = append(Sample, SE)
+		b, _ := json.Marshal(&Sample)
+		ioutil.WriteFile(filename, b, 0664)
 		return
 	}
 }
@@ -27,7 +31,7 @@ type Entry struct {
 	Value string
 }
 
-func GetEntries() []Entry {
+func GetEntries() (ret []Entry) {
 	path := GetLocation()
 	FileCheck(path)
 	file, e := ioutil.ReadFile(path)
@@ -41,9 +45,10 @@ func GetEntries() []Entry {
 		fmt.Println("Oh dear. I can't decode our bookmarks file. this is a pretty big issue.")
 	}
 	log.Fatal("Can't continue")
+	return ret
 }
 
-func Get(key string) Entry {
+func Get(key string) (e Entry) {
 	Bits := GetEntries()
 	for _, testcase := range Bits {
 		if testcase.Key == key {
@@ -51,6 +56,7 @@ func Get(key string) Entry {
 		}
 	}
 	log.Fatal("Cannot Find")
+	return e
 }
 
 func Set(key string, value string) {
