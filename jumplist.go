@@ -1,12 +1,22 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"strings"
 )
 
+var d = flag.String("d", "", "delete entry")
+
 func main() {
+	flag.Parse()
+
+	if *d != "" {
+		Remove(*d)
+		os.Exit(0)
+	}
+
 	fmt.Println(len(os.Args))
 	List := GetEntries()
 	for _, v := range List {
