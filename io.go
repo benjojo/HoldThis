@@ -67,7 +67,22 @@ func Set(key string, value string) {
 	}
 	// fmt.Println(e)
 	BitsReloaded := append(Bits, e)
-	b, _ := json.Marshal(BitsReloaded)
+	write(BitsReloaded)
+}
+
+func Remove(key string) {
+	Bits := GetEntries()
+	for i, testcase := range Bits {
+		if testcase.Key == key {
+			Bits = append(Bits[:i], Bits[i+1:]...)
+			fmt.Println("Removed the directory", testcase.Value, "with the name '", testcase.Key, "'")
+		}
+	}
+	write(Bits)
+}
+
+func write(Bits []Entry) {
+	b, _ := json.Marshal(Bits)
 	ioutil.WriteFile(GetLocation(), b, 0664)
 }
 
